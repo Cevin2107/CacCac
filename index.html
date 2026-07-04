@@ -44,118 +44,109 @@
         </div>
       </header>
 
-      <!-- Navigation Tabs -->
-      <nav class="nav-tabs animate-fade-in">
-        <button id="nav-btn-links" class="nav-tab-btn active">
-          <i class="fa-solid fa-ticket"></i> Lấy Link Premium
-        </button>
-        <button id="nav-btn-tv" class="nav-tab-btn">
-          <i class="fa-solid fa-tv"></i> Đăng Nhập Smart TV
-        </button>
-      </nav>
-
-      <!-- Panel: Netflix Link List -->
-      <div id="view-links" class="view-panel">
-        <!-- Stats Overview -->
-        <section class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon icon-emerald"><i class="fa-solid fa-circle-check"></i></div>
-            <div class="stat-info">
-              <span class="stat-label">Tổng link khả dụng</span>
-              <span id="total-links-count" class="stat-val">-</span>
+      <!-- Dashboard Top Control Section -->
+      <div class="dashboard-top-grid">
+        <!-- Left Side: Stats and Active Claims -->
+        <div class="control-left">
+          <!-- Stats Overview -->
+          <section class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon icon-emerald"><i class="fa-solid fa-circle-check"></i></div>
+              <div class="stat-info">
+                <span class="stat-label">Tổng link khả dụng</span>
+                <span id="total-links-count" class="stat-val">-</span>
+              </div>
             </div>
-          </div>
-          
-          <div class="stat-card">
-            <div class="stat-icon icon-purple"><i class="fa-solid fa-gauge-high"></i></div>
-            <div class="stat-info">
-              <span class="stat-label">Hạn ngạch sử dụng (Rate limit)</span>
-              <div class="rate-limit-wrapper">
-                <span id="rate-limit-text" class="stat-val">- / -</span>
-                <div class="progress-bar-bg">
-                  <div id="rate-limit-bar" class="progress-bar" style="width: 0%"></div>
+            
+            <div class="stat-card">
+              <div class="stat-icon icon-purple"><i class="fa-solid fa-gauge-high"></i></div>
+              <div class="stat-info">
+                <span class="stat-label">Hạn ngạch sử dụng (Rate limit)</span>
+                <div class="rate-limit-wrapper">
+                  <span id="rate-limit-text" class="stat-val">- / -</span>
+                  <div class="progress-bar-bg">
+                    <div id="rate-limit-bar" class="progress-bar" style="width: 0%"></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- Active Link Panel -->
-        <section id="active-link-panel" class="active-link-card hidden">
-          <div class="active-link-header">
-            <h3><i class="fa-solid fa-circle-play text-gradient"></i> Link Netflix đang hoạt động</h3>
-            <span id="active-link-badge" class="badge bg-primary">Link #xxxx</span>
-          </div>
-          <div class="active-link-body">
-            <div class="active-link-url-wrapper">
-              <input type="text" id="active-link-url" readonly value="" />
-              <button id="active-copy-btn" class="btn btn-primary"><i class="fa-solid fa-copy"></i> Copy</button>
-              <a id="active-open-btn" href="#" target="_blank" class="btn btn-primary-gradient"><i class="fa-solid fa-play"></i> Xem ngay</a>
+          <!-- Active Link Panel -->
+          <section id="active-link-panel" class="active-link-card hidden">
+            <div class="active-link-header">
+              <h3><i class="fa-solid fa-circle-play text-gradient"></i> Link Netflix đang hoạt động</h3>
+              <span id="active-link-badge" class="badge bg-primary">Link #xxxx</span>
             </div>
-            <button id="release-link-btn" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Trả link (Giải phóng lượt)</button>
-          </div>
-        </section>
-
-        <!-- Grid list -->
-        <main class="list-section">
-          <div class="section-title">
-            <h2><i class="fa-solid fa-ticket"></i> Danh sách Netflix Project</h2>
-            <div class="filter-wrapper">
-              <span class="filter-label">Bộ lọc quốc gia:</span>
-              <select id="country-filter" class="filter-select">
-                <option value="all">Tất cả quốc gia</option>
-              </select>
+            <div class="active-link-body">
+              <div class="active-link-url-wrapper">
+                <input type="text" id="active-link-url" readonly value="" />
+                <button id="active-copy-btn" class="btn btn-primary"><i class="fa-solid fa-copy"></i> Copy</button>
+                <a id="active-open-btn" href="#" target="_blank" class="btn btn-primary-gradient"><i class="fa-solid fa-play"></i> Xem ngay</a>
+              </div>
+              <button id="release-link-btn" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Trả link (Giải phóng lượt)</button>
             </div>
-          </div>
-          
-          <!-- Loading State -->
-          <div id="list-loading" class="loading-state hidden">
-            <div class="spinner"></div>
-            <p>Đang tải danh sách tài khoản Netflix...</p>
-          </div>
+          </section>
+        </div>
 
-          <!-- Empty State -->
-          <div id="list-empty" class="empty-state hidden">
-            <i class="fa-solid fa-folder-open"></i>
-            <p>Không tìm thấy tài khoản nào khả dụng.</p>
-          </div>
-
-          <!-- Real list Grid -->
-          <div id="projects-grid" class="projects-grid"></div>
-        </main>
-      </div>
-
-      <!-- Panel: Smart TV Login -->
-      <div id="view-tv" class="view-panel hidden">
-        <div class="tv-login-card glass-card">
-          <div class="tv-login-header">
-            <h2><i class="fa-solid fa-tv text-gradient"></i> Đăng nhập Netflix Smart TV</h2>
-            <p>Nhập mã kích hoạt gồm 8 chữ số hiển thị trên ứng dụng Netflix của Tivi hoặc thiết bị khác.</p>
-          </div>
-          
-          <div class="tv-login-body">
-            <div class="tv-input-wrapper">
-              <input type="text" id="tv-code-input" maxlength="9" placeholder="0000-0000" autocomplete="off" />
+        <!-- Right Side: Smart TV Login Card -->
+        <div class="control-right">
+          <section class="tv-login-card">
+            <div class="tv-login-header">
+              <h3><i class="fa-solid fa-tv text-gradient"></i> Đăng nhập Netflix Smart TV</h3>
+              <p>Nhập mã kích hoạt gồm 8 chữ số hiển thị trên ứng dụng Netflix của Tivi.</p>
             </div>
             
-            <button id="submit-tv-login-btn" class="btn btn-primary-gradient">
-              <i class="fa-solid fa-circle-check"></i> Kích hoạt Tivi
-            </button>
-          </div>
-          
-          <div class="tv-login-footer">
-            <div class="guide-box">
-              <h4>Các bước thực hiện trên Tivi:</h4>
-              <ol>
-                <li>Mở ứng dụng <strong>Netflix</strong> trên Tivi của bạn.</li>
-                <li>Chọn <strong>Đăng nhập</strong> -> Chọn <strong>Đăng nhập bằng Web (Sign in from Web)</strong>.</li>
-                <li>Màn hình Tivi sẽ hiển thị mã gồm <strong>8 chữ số</strong>.</li>
-                <li>Nhập mã đó vào ô phía trên và nhấn <strong>Kích hoạt Tivi</strong> để đăng nhập.</li>
-              </ol>
+            <div class="tv-login-body">
+              <div class="tv-input-wrapper">
+                <input type="text" id="tv-code-input" maxlength="9" placeholder="0000-0000" autocomplete="off" />
+              </div>
+              
+              <button id="submit-tv-login-btn" class="btn btn-primary-gradient">
+                <i class="fa-solid fa-circle-check"></i> Kích hoạt Tivi
+              </button>
             </div>
-          </div>
+            
+            <div class="tv-login-footer">
+              <div class="guide-box">
+                <h4>Các bước thực hiện trên Tivi:</h4>
+                <ol>
+                  <li>Mở ứng dụng <strong>Netflix</strong> trên Tivi -> Chọn <strong>Đăng nhập</strong>.</li>
+                  <li>Chọn <strong>Đăng nhập bằng Web (Sign in from Web)</strong> để lấy mã 8 chữ số.</li>
+                </ol>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
+
+      <!-- Grid list -->
+      <main class="list-section">
+        <div class="section-title">
+          <h2><i class="fa-solid fa-ticket"></i> Danh sách Netflix Project</h2>
+          <div class="filter-wrapper">
+            <span class="filter-label">Bộ lọc quốc gia:</span>
+            <select id="country-filter" class="filter-select">
+              <option value="all">Tất cả quốc gia</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Loading State -->
+        <div id="list-loading" class="loading-state hidden">
+          <div class="spinner"></div>
+          <p>Đang tải danh sách tài khoản Netflix...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="list-empty" class="empty-state hidden">
+          <i class="fa-solid fa-folder-open"></i>
+          <p>Không tìm thấy tài khoản nào khả dụng.</p>
+        </div>
+
+        <!-- Real list Grid -->
+        <div id="projects-grid" class="projects-grid"></div>
+      </main>
     </div>
 
     <!-- Claim Result Modal -->

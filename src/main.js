@@ -42,10 +42,6 @@ const tabButtons = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
 
 // TV Login Elements
-const navBtnLinks = document.getElementById('nav-btn-links');
-const navBtnTv = document.getElementById('nav-btn-tv');
-const viewLinks = document.getElementById('view-links');
-const viewTv = document.getElementById('view-tv');
 const tvCodeInput = document.getElementById('tv-code-input');
 const submitTvLoginBtn = document.getElementById('submit-tv-login-btn');
 
@@ -403,20 +399,7 @@ function bindEvents() {
     });
   });
 
-  // View Panel Navigation Toggle
-  navBtnLinks.addEventListener('click', () => {
-    navBtnLinks.classList.add('active');
-    navBtnTv.classList.remove('active');
-    viewLinks.classList.remove('hidden');
-    viewTv.classList.add('hidden');
-  });
 
-  navBtnTv.addEventListener('click', () => {
-    navBtnTv.classList.add('active');
-    navBtnLinks.classList.remove('active');
-    viewTv.classList.remove('hidden');
-    viewLinks.classList.add('hidden');
-  });
 
   // Auto format TV Code input: 0000-0000
   tvCodeInput.addEventListener('input', (e) => {
