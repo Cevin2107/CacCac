@@ -193,6 +193,11 @@ app.get('*', (req, res) => {
 });
 
 // Start Server
-app.listen(PORT, () => {
-  console.log(`[Server Ready] Backend proxy server running at http://localhost:${PORT}`);
-});
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`[Server Ready] Backend proxy server running at http://localhost:${PORT}`);
+  });
+}
+
+// Export for Vercel Serverless Function
+export default app;

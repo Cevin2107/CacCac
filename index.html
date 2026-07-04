@@ -1,327 +1,346 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/icon.png" />
-    <link rel="apple-touch-icon" href="/icon.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#080B11" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>CacCac — Netflix VIP claimer</title>
-    
-    <!-- Premium Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
-    <!-- Direct CSS Link to prevent FOUC -->
-    <link rel="stylesheet" href="/src/style.css" />
-  </head>
-  <body>
-    <!-- Background glowing orbs for premium visual effect -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
 
-    <div class="app-container">
-      <!-- Header -->
-      <header class="app-header">
-        <div class="logo-area">
-          <div class="logo-icon">
-            <i class="fa-solid fa-house-chimney-user"></i>
-          </div>
-          <div>
-            <h1>Cac<span>Cac</span></h1>
-            <p class="subtitle">Hệ thống Lấy Link Netflix Premium Tự Động</p>
-          </div>
-        </div>
-        <div class="header-actions">
-          <button id="tutorial-btn" class="btn btn-secondary">
-            <i class="fa-solid fa-circle-question"></i> Hướng dẫn sử dụng
-          </button>
-          <button id="refresh-list-btn" class="btn btn-primary">
-            <i class="fa-solid fa-arrows-rotate"></i> Tải lại danh sách
-          </button>
-        </div>
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/icon.png" />
+  <link rel="apple-touch-icon" href="/icon.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#080B11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>CacCac — Netflix VIP claimer</title>
 
-      <!-- Premium Tab Navigation Switcher -->
-      <div class="tabs-container-wrapper animate-fade-in">
-        <div class="premium-tabs">
-          <button id="nav-btn-links" class="premium-tab-btn active" data-view="links">
-            <i class="fa-solid fa-ticket"></i> Lấy Link Premium
-          </button>
-          <button id="nav-btn-tv" class="premium-tab-btn" data-view="tv">
-            <i class="fa-solid fa-tv"></i> Đăng Nhập Smart TV
-          </button>
-          <div class="tab-slider"></div>
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Direct CSS Link to prevent FOUC -->
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+  <!-- Background glowing orbs for premium visual effect -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <i class="fa-solid fa-house-chimney-user"></i>
+        </div>
+        <div>
+          <h1>Cac<span>Cac</span></h1>
+          <p class="subtitle">Hệ thống Lấy Link Netflix Premium Tự Động</p>
         </div>
       </div>
+      <div class="header-actions">
+        <button id="tutorial-btn" class="btn btn-secondary">
+          <i class="fa-solid fa-circle-question"></i> Hướng dẫn sử dụng
+        </button>
+        <button id="refresh-list-btn" class="btn btn-primary">
+          <i class="fa-solid fa-arrows-rotate"></i> Tải lại danh sách
+        </button>
+      </div>
+    </header>
 
-      <!-- Panel: Netflix Link List -->
-      <div id="view-links" class="view-panel">
-        <!-- Stats Overview -->
-        <section class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon icon-emerald"><i class="fa-solid fa-circle-check"></i></div>
-            <div class="stat-info">
-              <span class="stat-label">Tổng link khả dụng</span>
-              <span id="total-links-count" class="stat-val">-</span>
-            </div>
+    <!-- Premium Tab Navigation Switcher -->
+    <div class="tabs-container-wrapper animate-fade-in">
+      <div class="premium-tabs">
+        <button id="nav-btn-links" class="premium-tab-btn active" data-view="links">
+          <i class="fa-solid fa-ticket"></i> Lấy Link Premium
+        </button>
+        <button id="nav-btn-tv" class="premium-tab-btn" data-view="tv">
+          <i class="fa-solid fa-tv"></i> Đăng Nhập Smart TV
+        </button>
+        <div class="tab-slider"></div>
+      </div>
+    </div>
+
+    <!-- Panel: Netflix Link List -->
+    <div id="view-links" class="view-panel">
+      <!-- Stats Overview -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon icon-emerald"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Tổng link khả dụng</span>
+            <span id="total-links-count" class="stat-val">-</span>
           </div>
-          
-          <div class="stat-card">
-            <div class="stat-icon icon-purple"><i class="fa-solid fa-gauge-high"></i></div>
-            <div class="stat-info">
-              <span class="stat-label">Hạn ngạch sử dụng (Rate limit)</span>
-              <div class="rate-limit-wrapper">
-                <span id="rate-limit-text" class="stat-val">- / -</span>
-                <div class="progress-bar-bg">
-                  <div id="rate-limit-bar" class="progress-bar" style="width: 0%"></div>
-                </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-purple"><i class="fa-solid fa-gauge-high"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Hạn ngạch sử dụng (Rate limit)</span>
+            <div class="rate-limit-wrapper">
+              <span id="rate-limit-text" class="stat-val">- / -</span>
+              <div class="progress-bar-bg">
+                <div id="rate-limit-bar" class="progress-bar" style="width: 0%"></div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Active Link Panel -->
-        <section id="active-link-panel" class="active-link-card hidden">
-          <div class="active-link-header">
-            <h3><i class="fa-solid fa-circle-play text-gradient"></i> Link Netflix đang hoạt động</h3>
-            <span id="active-link-badge" class="badge bg-primary">Link #xxxx</span>
+      <!-- Active Link Panel -->
+      <section id="active-link-panel" class="active-link-card hidden">
+        <div class="active-link-header">
+          <h3><i class="fa-solid fa-circle-play text-gradient"></i> Link Netflix đang hoạt động</h3>
+          <span id="active-link-badge" class="badge bg-primary">Link #xxxx</span>
+        </div>
+        <div class="active-link-body">
+          <div class="active-link-url-wrapper">
+            <input type="text" id="active-link-url" readonly value="" />
+            <button id="active-copy-btn" class="btn btn-primary"><i class="fa-solid fa-copy"></i> Copy</button>
+            <a id="active-open-btn" href="#" target="_blank" class="btn btn-primary-gradient"><i
+                class="fa-solid fa-play"></i> Xem ngay</a>
           </div>
-          <div class="active-link-body">
-            <div class="active-link-url-wrapper">
-              <input type="text" id="active-link-url" readonly value="" />
-              <button id="active-copy-btn" class="btn btn-primary"><i class="fa-solid fa-copy"></i> Copy</button>
-              <a id="active-open-btn" href="#" target="_blank" class="btn btn-primary-gradient"><i class="fa-solid fa-play"></i> Xem ngay</a>
-            </div>
-            <button id="release-link-btn" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Trả link (Giải phóng lượt)</button>
+          <button id="release-link-btn" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Trả link (Giải
+            phóng lượt)</button>
+        </div>
+      </section>
+      <!-- Grid list -->
+      <main class="list-section">
+        <div class="section-title">
+          <h2><i class="fa-solid fa-ticket"></i> Danh sách Netflix Siêu Pro Vip Premium</h2>
+          <div class="filter-wrapper">
+            <span class="filter-label">Bộ lọc quốc gia:</span>
+            <select id="country-filter" class="filter-select">
+              <option value="all">Tất cả quốc gia</option>
+            </select>
           </div>
-        </section>
-        <!-- Grid list -->
-        <main class="list-section">
-          <div class="section-title">
-            <h2><i class="fa-solid fa-ticket"></i> Danh sách Netflix Project</h2>
-            <div class="filter-wrapper">
-              <span class="filter-label">Bộ lọc quốc gia:</span>
-              <select id="country-filter" class="filter-select">
-                <option value="all">Tất cả quốc gia</option>
-              </select>
-            </div>
-          </div>
-          
-          <!-- Loading State -->
-          <div id="list-loading" class="loading-state hidden">
-            <div class="spinner"></div>
-            <p>Đang tải danh sách tài khoản Netflix...</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="list-loading" class="loading-state hidden">
+          <div class="spinner"></div>
+          <p>Đang tải danh sách tài khoản Netflix...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="list-empty" class="empty-state hidden">
+          <i class="fa-solid fa-folder-open"></i>
+          <p>Không tìm thấy tài khoản nào khả dụng.</p>
+        </div>
+
+        <!-- Real list Grid -->
+        <div id="projects-grid" class="projects-grid"></div>
+      </main>
+    </div>
+
+    <!-- Panel: Smart TV Login -->
+    <div id="view-tv" class="view-panel hidden">
+      <div class="tv-login-card-standalone">
+        <div class="tv-login-header">
+          <h2><i class="fa-solid fa-tv text-gradient"></i> Đăng nhập Netflix Smart TV</h2>
+          <p>Nhập mã kích hoạt gồm 8 chữ số hiển thị trên ứng dụng Netflix của Tivi.</p>
+        </div>
+
+        <div class="tv-login-body">
+          <div class="tv-input-wrapper">
+            <input type="text" id="tv-code-input" maxlength="9" placeholder="0000-0000" autocomplete="off" />
           </div>
 
-          <!-- Empty State -->
-          <div id="list-empty" class="empty-state hidden">
-            <i class="fa-solid fa-folder-open"></i>
-            <p>Không tìm thấy tài khoản nào khả dụng.</p>
-          </div>
+          <button id="submit-tv-login-btn" class="btn btn-primary-gradient">
+            <i class="fa-solid fa-circle-check"></i> Kích hoạt Tivi
+          </button>
+        </div>
 
-          <!-- Real list Grid -->
-          <div id="projects-grid" class="projects-grid"></div>
-        </main>
-      </div>
-
-      <!-- Panel: Smart TV Login -->
-      <div id="view-tv" class="view-panel hidden">
-        <div class="tv-login-card-standalone">
-          <div class="tv-login-header">
-            <h2><i class="fa-solid fa-tv text-gradient"></i> Đăng nhập Netflix Smart TV</h2>
-            <p>Nhập mã kích hoạt gồm 8 chữ số hiển thị trên ứng dụng Netflix của Tivi.</p>
-          </div>
-          
-          <div class="tv-login-body">
-            <div class="tv-input-wrapper">
-              <input type="text" id="tv-code-input" maxlength="9" placeholder="0000-0000" autocomplete="off" />
-            </div>
-            
-            <button id="submit-tv-login-btn" class="btn btn-primary-gradient">
-              <i class="fa-solid fa-circle-check"></i> Kích hoạt Tivi
-            </button>
-          </div>
-          
-          <div class="tv-login-footer">
-            <div class="guide-box">
-              <h4>Các bước thực hiện trên Tivi:</h4>
-              <ol>
-                <li>Mở ứng dụng <strong>Netflix</strong> trên Tivi của bạn.</li>
-                <li>Chọn <strong>Đăng nhập</strong> -> Chọn <strong>Đăng nhập bằng Web (Sign in from Web)</strong>.</li>
-                <li>Màn hình Tivi sẽ hiển thị mã gồm <strong>8 chữ số</strong>.</li>
-                <li>Nhập mã đó vào ô phía trên và nhấn <strong>Kích hoạt Tivi</strong> để đăng nhập.</li>
-              </ol>
-            </div>
+        <div class="tv-login-footer">
+          <div class="guide-box">
+            <h4>Các bước thực hiện trên Tivi:</h4>
+            <ol>
+              <li>Mở ứng dụng <strong>Netflix</strong> trên Tivi của bạn.</li>
+              <li>Chọn <strong>Đăng nhập</strong> -> Chọn <strong>Đăng nhập bằng Web (Sign in from Web)</strong>.</li>
+              <li>Màn hình Tivi sẽ hiển thị mã gồm <strong>8 chữ số</strong>.</li>
+              <li>Nhập mã đó vào ô phía trên và nhấn <strong>Kích hoạt Tivi</strong> để đăng nhập.</li>
+            </ol>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Claim Result Modal -->
-    <div id="result-modal" class="modal-overlay hidden">
-      <div class="modal-content glass-card">
-        <div class="modal-header">
-          <h2><i class="fa-solid fa-wand-magic-sparkles text-gradient"></i> Tạo Link Thành Công!</h2>
-          <button id="close-modal-btn" class="close-btn">&times;</button>
+  <!-- Claim Result Modal -->
+  <div id="result-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-wand-magic-sparkles text-gradient"></i> Tạo Link Thành Công!</h2>
+        <button id="close-modal-btn" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="project-summary-badge">
+          <span id="modal-project-label" class="badge bg-primary">Link #xxxx</span>
+          <span id="modal-project-plan" class="badge bg-purple">Premium</span>
         </div>
-        <div class="modal-body">
-          <div class="project-summary-badge">
-            <span id="modal-project-label" class="badge bg-primary">Link #xxxx</span>
-            <span id="modal-project-plan" class="badge bg-purple">Premium</span>
-          </div>
-          <p class="modal-desc">Sử dụng liên kết dưới đây để đăng nhập trực tiếp vào tài khoản Netflix của bạn:</p>
-          
-          <div class="result-link-box">
-            <input type="text" id="claimed-link-url" readonly value="" />
-            <button id="copy-link-btn" class="btn btn-primary" title="Sao chép link">
-              <i class="fa-solid fa-copy"></i> Copy
-            </button>
-          </div>
-          
-          <div class="modal-notice">
-            <i class="fa-solid fa-circle-info"></i>
-            <span>Vui lòng không thay đổi thông tin tài khoản (mật khẩu, thanh toán) để tránh bị khóa link.</span>
-          </div>
+        <p class="modal-desc">Sử dụng liên kết dưới đây để đăng nhập trực tiếp vào tài khoản Netflix của bạn:</p>
+
+        <div class="result-link-box">
+          <input type="text" id="claimed-link-url" readonly value="" />
+          <button id="copy-link-btn" class="btn btn-primary" title="Sao chép link">
+            <i class="fa-solid fa-copy"></i> Copy
+          </button>
         </div>
-        <div class="modal-footer">
-          <button id="close-modal-secondary-btn" class="btn btn-secondary">Đóng</button>
-          <a id="open-netflix-btn" href="#" target="_blank" class="btn btn-primary-gradient">
-            <i class="fa-solid fa-circle-play"></i> Truy cập ngay
-          </a>
+
+        <div class="modal-notice">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Vui lòng không thay đổi thông tin tài khoản (mật khẩu, thanh toán) để tránh bị khóa link.</span>
         </div>
       </div>
-    </div>
-
-    <!-- Tutorial Modal -->
-    <div id="tutorial-modal" class="modal-overlay hidden">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2><i class="fa-solid fa-circle-info text-gradient"></i> Hướng dẫn đăng nhập</h2>
-          <button id="close-tutorial-btn" class="close-btn">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="tab-header">
-            <button class="tab-btn active" data-tab="pc"><i class="fa-solid fa-desktop"></i> Máy tính</button>
-            <button class="tab-btn" data-tab="android"><i class="fa-solid fa-android"></i> Android</button>
-            <button class="tab-btn" data-tab="ios"><i class="fa-solid fa-mobile-screen-button"></i> iOS</button>
-            <button class="tab-btn" data-tab="tv"><i class="fa-solid fa-tv"></i> Smart TV</button>
-          </div>
-          
-          <div class="tab-container">
-            <!-- PC Content -->
-            <div class="tab-content active" id="tab-pc">
-              <ul class="step-list">
-                <li>
-                  <span class="step-num">1</span>
-                  <div class="step-text">Nhấn nút <strong>Tạo ngay</strong> trên thẻ tài khoản bạn muốn dùng.</div>
-                </li>
-                <li>
-                  <span class="step-num">2</span>
-                  <div class="step-text">Một cửa sổ kết quả hiện ra, nhấn nút <strong>Truy cập ngay</strong> (hoặc copy liên kết mở trên trình duyệt).</div>
-                </li>
-                <li>
-                  <span class="step-num">3</span>
-                  <div class="step-text">
-                    Trên thanh địa chỉ trình duyệt, hãy <strong>xóa cụm từ <code>/account</code></strong> ở cuối dòng (Ví dụ đường dẫn đang hiển thị là <code>https://www.netflix.com/account</code> thì xóa đi để chỉ còn <code>https://www.netflix.com/</code>) rồi nhấn <strong>Enter</strong> để quay về trang chủ xem phim.
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Android Content -->
-            <div class="tab-content" id="tab-android">
-              <ul class="step-list">
-                <li>
-                  <span class="step-num">1</span>
-                  <div class="step-text">Nhấn nút <strong>Tạo ngay</strong> (Khuyên dùng trình duyệt <strong>Google Chrome</strong>).</div>
-                </li>
-                <li>
-                  <span class="step-num">2</span>
-                  <div class="step-text">Trong cửa sổ kết quả, nhấn <strong>Truy cập ngay</strong>.</div>
-                </li>
-                <li>
-                  <span class="step-num">3</span>
-                  <div class="step-text">
-                    Trên thanh tìm kiếm của Chrome, <strong>xóa chữ <code>/account</code></strong> ở cuối, hoặc tạo một tab mới hoàn toàn rồi nhập địa chỉ <strong><code>https://www.netflix.com/</code></strong>.
-                  </div>
-                </li>
-                <li>
-                  <span class="step-num">4</span>
-                  <div class="step-text">
-                    Lúc này trang web Netflix hiển thị, bạn sẽ thấy một nút màu đỏ ghi <strong>"Open App"</strong>. Nhấn vào nút này, hệ thống sẽ tự động chuyển tiếp và đăng nhập tài khoản vào ứng dụng Netflix trên máy của bạn.
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <!-- iOS Content -->
-            <div class="tab-content" id="tab-ios">
-              <ul class="step-list">
-                <li>
-                  <span class="step-num">1</span>
-                  <div class="step-text">Nhấn nút <strong>Tạo ngay</strong> (Khuyên dùng trình duyệt mặc định <strong>Safari</strong>).</div>
-                </li>
-                <li>
-                  <span class="step-num">2</span>
-                  <div class="step-text">Trong cửa sổ kết quả, nhấn <strong>Truy cập ngay</strong>.</div>
-                </li>
-                <li>
-                  <span class="step-num">3</span>
-                  <div class="step-text">
-                    Trên thanh tìm kiếm của Safari, <strong>xóa chữ <code>/account</code></strong> ở cuối, hoặc tạo một tab mới rồi truy cập trực tiếp địa chỉ <strong><code>https://www.netflix.com/</code></strong>.
-                  </div>
-                </li>
-                <li>
-                  <span class="step-num">4</span>
-                  <div class="step-text">
-                    Tại trang Netflix vừa tải, tìm và nhấn vào nút đỏ <strong>"Open App"</strong>. Ứng dụng Netflix trên iPhone/iPad của bạn sẽ tự động mở lên và được đăng nhập sẵn sàng.
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <!-- TV Content -->
-            <div class="tab-content" id="tab-tv">
-              <ul class="step-list">
-                <li>
-                  <span class="step-num">1</span>
-                  <div class="step-text">Mở ứng dụng <strong>Netflix</strong> trên Tivi của bạn.</div>
-                </li>
-                <li>
-                  <span class="step-num">2</span>
-                  <div class="step-text">Chọn <strong>Đăng nhập</strong> -> Chọn <strong>Đăng nhập bằng Web (Sign in from Web)</strong>. Một mã gồm <strong>8 chữ số</strong> sẽ hiển thị trên màn hình Tivi.</div>
-                </li>
-                <li>
-                  <span class="step-num">3</span>
-                  <div class="step-text">
-                    Trên ứng dụng web này, chuyển sang thẻ <strong>Đăng Nhập Smart TV</strong> ở màn hình chính.
-                  </div>
-                </li>
-                <li>
-                  <span class="step-num">4</span>
-                  <div class="step-text">
-                    Nhập mã 8 số vào ô kích hoạt và nhấn <strong>Kích hoạt Tivi</strong>. Tivi của bạn sẽ tự động đăng nhập ngay lập tức.
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button id="close-tutorial-secondary-btn" class="btn btn-secondary">Đã rõ</button>
-        </div>
+      <div class="modal-footer">
+        <button id="close-modal-secondary-btn" class="btn btn-secondary">Đóng</button>
+        <a id="open-netflix-btn" href="#" target="_blank" class="btn btn-primary-gradient">
+          <i class="fa-solid fa-circle-play"></i> Truy cập ngay
+        </a>
       </div>
     </div>
+  </div>
 
-    <!-- Notification Toast Container -->
-    <div id="toast-container" class="toast-container"></div>
+  <!-- Tutorial Modal -->
+  <div id="tutorial-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-circle-info text-gradient"></i> Hướng dẫn đăng nhập</h2>
+        <button id="close-tutorial-btn" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="tab-header">
+          <button class="tab-btn active" data-tab="pc"><i class="fa-solid fa-desktop"></i> Máy tính</button>
+          <button class="tab-btn" data-tab="android"><i class="fa-solid fa-android"></i> Android</button>
+          <button class="tab-btn" data-tab="ios"><i class="fa-solid fa-mobile-screen-button"></i> iOS</button>
+          <button class="tab-btn" data-tab="tv"><i class="fa-solid fa-tv"></i> Smart TV</button>
+        </div>
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+        <div class="tab-container">
+          <!-- PC Content -->
+          <div class="tab-content active" id="tab-pc">
+            <ul class="step-list">
+              <li>
+                <span class="step-num">1</span>
+                <div class="step-text">Nhấn nút <strong>Tạo ngay</strong> trên thẻ tài khoản bạn muốn dùng.</div>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <div class="step-text">Một cửa sổ kết quả hiện ra, nhấn nút <strong>Truy cập ngay</strong> (hoặc copy
+                  liên kết mở trên trình duyệt).</div>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <div class="step-text">
+                  Trên thanh địa chỉ trình duyệt, hãy <strong>xóa cụm từ <code>/account</code></strong> ở cuối dòng (Ví
+                  dụ đường dẫn đang hiển thị là <code>https://www.netflix.com/account</code> thì xóa đi để chỉ còn
+                  <code>https://www.netflix.com/</code>) rồi nhấn <strong>Enter</strong> để quay về trang chủ xem phim.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Android Content -->
+          <div class="tab-content" id="tab-android">
+            <ul class="step-list">
+              <li>
+                <span class="step-num">1</span>
+                <div class="step-text">Nhấn nút <strong>Tạo ngay</strong> (Khuyên dùng trình duyệt <strong>Google
+                    Chrome</strong>).</div>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <div class="step-text">Trong cửa sổ kết quả, nhấn <strong>Truy cập ngay</strong>.</div>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <div class="step-text">
+                  Trên thanh tìm kiếm của Chrome, <strong>xóa chữ <code>/account</code></strong> ở cuối, hoặc tạo một
+                  tab mới hoàn toàn rồi nhập địa chỉ <strong><code>https://www.netflix.com/</code></strong>.
+                </div>
+              </li>
+              <li>
+                <span class="step-num">4</span>
+                <div class="step-text">
+                  Lúc này trang web Netflix hiển thị, bạn sẽ thấy một nút màu đỏ ghi <strong>"Open App"</strong>. Nhấn
+                  vào nút này, hệ thống sẽ tự động chuyển tiếp và đăng nhập tài khoản vào ứng dụng Netflix trên máy của
+                  bạn.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- iOS Content -->
+          <div class="tab-content" id="tab-ios">
+            <ul class="step-list">
+              <li>
+                <span class="step-num">1</span>
+                <div class="step-text">Nhấn nút <strong>Tạo ngay</strong> (Khuyên dùng trình duyệt mặc định
+                  <strong>Safari</strong>).</div>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <div class="step-text">Trong cửa sổ kết quả, nhấn <strong>Truy cập ngay</strong>.</div>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <div class="step-text">
+                  Trên thanh tìm kiếm của Safari, <strong>xóa chữ <code>/account</code></strong> ở cuối, hoặc tạo một
+                  tab mới rồi truy cập trực tiếp địa chỉ <strong><code>https://www.netflix.com/</code></strong>.
+                </div>
+              </li>
+              <li>
+                <span class="step-num">4</span>
+                <div class="step-text">
+                  Tại trang Netflix vừa tải, tìm và nhấn vào nút đỏ <strong>"Open App"</strong>. Ứng dụng Netflix trên
+                  iPhone/iPad của bạn sẽ tự động mở lên và được đăng nhập sẵn sàng.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- TV Content -->
+          <div class="tab-content" id="tab-tv">
+            <ul class="step-list">
+              <li>
+                <span class="step-num">1</span>
+                <div class="step-text">Mở ứng dụng <strong>Netflix</strong> trên Tivi của bạn.</div>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <div class="step-text">Chọn <strong>Đăng nhập</strong> -> Chọn <strong>Đăng nhập bằng Web (Sign in from
+                    Web)</strong>. Một mã gồm <strong>8 chữ số</strong> sẽ hiển thị trên màn hình Tivi.</div>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <div class="step-text">
+                  Trên ứng dụng web này, chuyển sang thẻ <strong>Đăng Nhập Smart TV</strong> ở màn hình chính.
+                </div>
+              </li>
+              <li>
+                <span class="step-num">4</span>
+                <div class="step-text">
+                  Nhập mã 8 số vào ô kích hoạt và nhấn <strong>Kích hoạt Tivi</strong>. Tivi của bạn sẽ tự động đăng
+                  nhập ngay lập tức.
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="close-tutorial-secondary-btn" class="btn btn-secondary">Đã rõ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
