@@ -246,10 +246,6 @@ function renderProjects() {
 
 // Trigger POST claim API to request a login session link
 async function claimProject(projectId, buttonEl, projectInfo) {
-  if (!token) {
-    showToast('Vui lòng cấu hình token trước.', 'warning');
-    return;
-  }
 
   // Set loading state for button
   const originalHtml = buttonEl.innerHTML;
