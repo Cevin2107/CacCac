@@ -98,6 +98,33 @@
             <button id="release-link-btn" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Trả link (Giải phóng lượt)</button>
           </div>
         </section>
+        <!-- Grid list -->
+        <main class="list-section">
+          <div class="section-title">
+            <h2><i class="fa-solid fa-ticket"></i> Danh sách Netflix Project</h2>
+            <div class="filter-wrapper">
+              <span class="filter-label">Bộ lọc quốc gia:</span>
+              <select id="country-filter" class="filter-select">
+                <option value="all">Tất cả quốc gia</option>
+              </select>
+            </div>
+          </div>
+          
+          <!-- Loading State -->
+          <div id="list-loading" class="loading-state hidden">
+            <div class="spinner"></div>
+            <p>Đang tải danh sách tài khoản Netflix...</p>
+          </div>
+
+          <!-- Empty State -->
+          <div id="list-empty" class="empty-state hidden">
+            <i class="fa-solid fa-folder-open"></i>
+            <p>Không tìm thấy tài khoản nào khả dụng.</p>
+          </div>
+
+          <!-- Real list Grid -->
+          <div id="projects-grid" class="projects-grid"></div>
+        </main>
       </div>
 
       <!-- Panel: Smart TV Login -->
@@ -131,34 +158,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Grid list -->
-      <main class="list-section">
-        <div class="section-title">
-          <h2><i class="fa-solid fa-ticket"></i> Danh sách Netflix Project</h2>
-          <div class="filter-wrapper">
-            <span class="filter-label">Bộ lọc quốc gia:</span>
-            <select id="country-filter" class="filter-select">
-              <option value="all">Tất cả quốc gia</option>
-            </select>
-          </div>
-        </div>
-        
-        <!-- Loading State -->
-        <div id="list-loading" class="loading-state hidden">
-          <div class="spinner"></div>
-          <p>Đang tải danh sách tài khoản Netflix...</p>
-        </div>
-
-        <!-- Empty State -->
-        <div id="list-empty" class="empty-state hidden">
-          <i class="fa-solid fa-folder-open"></i>
-          <p>Không tìm thấy tài khoản nào khả dụng.</p>
-        </div>
-
-        <!-- Real list Grid -->
-        <div id="projects-grid" class="projects-grid"></div>
-      </main>
     </div>
 
     <!-- Claim Result Modal -->
