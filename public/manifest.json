@@ -1,0 +1,17 @@
+{
+  "name": "CacCac Netflix Claimer",
+  "short_name": "CacCac",
+  "description": "FriendsHouse Netflix VIP Link Claimer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080B11",
+  "theme_color": "#080B11",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    }
+  ]
+}

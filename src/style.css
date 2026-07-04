@@ -1213,3 +1213,43 @@ body {
   border-color: rgba(16, 185, 129, 0.25);
   box-shadow: 0 20px 60px rgba(16, 185, 129, 0.05), var(--shadow-premium);
 }
+
+@media (max-width: 600px) {
+  .premium-tabs {
+    width: 100%;
+    border-radius: 16px;
+  }
+  .premium-tab-btn {
+    padding: 10px 12px;
+    font-size: 13px;
+    flex: 1;
+    justify-content: center;
+  }
+  .tv-login-card-standalone {
+    padding: 24px 16px;
+    margin: 10px auto;
+    border-radius: 20px;
+  }
+  .tv-input-wrapper input {
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+  .tv-login-header h2 {
+    font-size: 18px;
+  }
+  .app-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .header-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-card {
+    padding: 16px;
+  }
+}
