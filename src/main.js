@@ -33,6 +33,14 @@ const activeCopyBtn = document.getElementById('active-copy-btn');
 const activeOpenBtn = document.getElementById('active-open-btn');
 const releaseLinkBtn = document.getElementById('release-link-btn');
 
+// Tutorial Modal Elements
+const tutorialModal = document.getElementById('tutorial-modal');
+const tutorialBtn = document.getElementById('tutorial-btn');
+const closeTutorialBtn = document.getElementById('close-tutorial-btn');
+const closeTutorialSecondaryBtn = document.getElementById('close-tutorial-secondary-btn');
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
 // Toast notification helper
 function showToast(message, type = 'info') {
   const toast = document.createElement('div');
@@ -354,6 +362,38 @@ function bindEvents() {
 
   // Release Active Link button click
   releaseLinkBtn.addEventListener('click', releaseActiveLink);
+
+  // Open Tutorial Modal
+  tutorialBtn.addEventListener('click', () => {
+    tutorialModal.classList.remove('hidden');
+  });
+
+  // Close Tutorial Modal
+  const closeTutorial = () => tutorialModal.classList.add('hidden');
+  closeTutorialBtn.addEventListener('click', closeTutorial);
+  closeTutorialSecondaryBtn.addEventListener('click', closeTutorial);
+  tutorialModal.addEventListener('click', (e) => {
+    if (e.target === tutorialModal) closeTutorial();
+  });
+
+  // Tab switching logic for tutorial
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons and contents
+      tabButtons.forEach(tb => tb.classList.remove('active'));
+      tabContents.forEach(tc => tc.classList.remove('active'));
+
+      // Add active class to clicked button
+      btn.classList.add('active');
+
+      // Add active class to corresponding content panel
+      const targetTab = btn.getAttribute('data-tab');
+      const targetContent = document.getElementById(`tab-${targetTab}`);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+    });
+  });
 }
 
 // Handle Active Assignments UI State

@@ -35,6 +35,9 @@
           </div>
         </div>
         <div class="header-actions">
+          <button id="tutorial-btn" class="btn btn-secondary">
+            <i class="fa-solid fa-circle-question"></i> Hướng dẫn sử dụng
+          </button>
           <button id="refresh-list-btn" class="btn btn-primary">
             <i class="fa-solid fa-arrows-rotate"></i> Tải lại danh sách
           </button>
@@ -142,6 +145,100 @@
           <a id="open-netflix-btn" href="#" target="_blank" class="btn btn-primary-gradient">
             <i class="fa-solid fa-circle-play"></i> Truy cập ngay
           </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorial-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2><i class="fa-solid fa-circle-info text-gradient"></i> Hướng dẫn đăng nhập</h2>
+          <button id="close-tutorial-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="tab-header">
+            <button class="tab-btn active" data-tab="pc"><i class="fa-solid fa-desktop"></i> Máy tính</button>
+            <button class="tab-btn" data-tab="android"><i class="fa-solid fa-android"></i> Android</button>
+            <button class="tab-btn" data-tab="ios"><i class="fa-solid fa-mobile-screen-button"></i> iOS</button>
+          </div>
+          
+          <div class="tab-container">
+            <!-- PC Content -->
+            <div class="tab-content active" id="tab-pc">
+              <ul class="step-list">
+                <li>
+                  <span class="step-num">1</span>
+                  <div class="step-text">Nhấn nút <strong>Tạo ngay</strong> trên thẻ tài khoản bạn muốn dùng.</div>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <div class="step-text">Một cửa sổ kết quả hiện ra, nhấn nút <strong>Truy cập ngay</strong> (hoặc copy liên kết mở trên trình duyệt).</div>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <div class="step-text">
+                    Trên thanh địa chỉ trình duyệt, hãy <strong>xóa cụm từ <code>/account</code></strong> ở cuối dòng (Ví dụ đường dẫn đang hiển thị là <code>https://www.netflix.com/account</code> thì xóa đi để chỉ còn <code>https://www.netflix.com/</code>) rồi nhấn <strong>Enter</strong> để quay về trang chủ xem phim.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Android Content -->
+            <div class="tab-content" id="tab-android">
+              <ul class="step-list">
+                <li>
+                  <span class="step-num">1</span>
+                  <div class="step-text">Nhấn nút <strong>Tạo ngay</strong> (Khuyên dùng trình duyệt <strong>Google Chrome</strong>).</div>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <div class="step-text">Trong cửa sổ kết quả, nhấn <strong>Truy cập ngay</strong>.</div>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <div class="step-text">
+                    Trên thanh tìm kiếm của Chrome, <strong>xóa chữ <code>/account</code></strong> ở cuối, hoặc tạo một tab mới hoàn toàn rồi nhập địa chỉ <strong><code>https://www.netflix.com/</code></strong>.
+                  </div>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <div class="step-text">
+                    Lúc này trang web Netflix hiển thị, bạn sẽ thấy một nút màu đỏ ghi <strong>"Open App"</strong>. Nhấn vào nút này, hệ thống sẽ tự động chuyển tiếp và đăng nhập tài khoản vào ứng dụng Netflix trên máy của bạn.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- iOS Content -->
+            <div class="tab-content" id="tab-ios">
+              <ul class="step-list">
+                <li>
+                  <span class="step-num">1</span>
+                  <div class="step-text">Nhấn nút <strong>Tạo ngay</strong> (Khuyên dùng trình duyệt mặc định <strong>Safari</strong>).</div>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <div class="step-text">Trong cửa sổ kết quả, nhấn <strong>Truy cập ngay</strong>.</div>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <div class="step-text">
+                    Trên thanh tìm kiếm của Safari, <strong>xóa chữ <code>/account</code></strong> ở cuối, hoặc tạo một tab mới rồi truy cập trực tiếp địa chỉ <strong><code>https://www.netflix.com/</code></strong>.
+                  </div>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <div class="step-text">
+                    Tại trang Netflix vừa tải, tìm và nhấn vào nút đỏ <strong>"Open App"</strong>. Ứng dụng Netflix trên iPhone/iPad của bạn sẽ tự động mở lên và được đăng nhập sẵn sàng.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="close-tutorial-secondary-btn" class="btn btn-secondary">Đã rõ</button>
         </div>
       </div>
     </div>
