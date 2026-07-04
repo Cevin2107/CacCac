@@ -110,6 +110,54 @@ app.post('/api/netflix-free/release', async (req, res) => {
   }
 });
 
+// Proxy Endpoint: Smart TV Login
+app.post('/api/external/tv-login', async (req, res) => {
+  try {
+    if (!TOKEN) {
+      return res.status(500).json({ success: false, error: 'Chưa cấu hình FRIENDSHOUSE_TOKEN trên server.' });
+    }
+
+    const { code } = req.body;
+    if (!code) {
+      return res.status(400).json({ success: false, error: 'Thiếu mã TV code.' });
+    }
+
+    // Auto decode user_id (sub claim) from JWT token on the server-side
+    let userId;
+    try {
+      const payloadPart = TOKEN.split(' ')[1].split('.')[1];
+      const payloadJson = Buffer.from(payloadPart, 'base64').toString('utf8');
+      const payload = JSON.parse(payloadJson);
+      userId = parseInt(payload.sub);
+    } catch (jwtErr) {
+      console.error('Failed to parse userId from token:', jwtErr);
+      return res.status(500).json({ success: false, error: 'Token cấu hình không đúng định dạng JWT.' });
+    }
+
+    if (!userId) {
+      return res.status(500).json({ success: false, error: 'Không thể xác định user_id từ token.' });
+    }
+
+    // Clean code if it contains dash (e.g. 1234-5678 -> 12345678)
+    const cleanCode = code.replace(/-/g, '').trim();
+
+    const response = await fetch('https://friendshouse.io.vn/api/external/tv-login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': TOKEN
+      },
+      body: JSON.stringify({ user_id: userId, code: cleanCode })
+    });
+
+    const data = await response.json();
+    res.status(response.status).json(data);
+  } catch (error) {
+    console.error('Error in tv-login proxy:', error);
+    res.status(500).json({ success: false, error: 'Lỗi kết nối tới máy chủ Netflix TV login.' });
+  }
+});
+
 // Fallback to index.html for single-page routing in production
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));

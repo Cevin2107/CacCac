@@ -41,6 +41,14 @@ const closeTutorialSecondaryBtn = document.getElementById('close-tutorial-second
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
 
+// TV Login Elements
+const navBtnLinks = document.getElementById('nav-btn-links');
+const navBtnTv = document.getElementById('nav-btn-tv');
+const viewLinks = document.getElementById('view-links');
+const viewTv = document.getElementById('view-tv');
+const tvCodeInput = document.getElementById('tv-code-input');
+const submitTvLoginBtn = document.getElementById('submit-tv-login-btn');
+
 // Toast notification helper
 function showToast(message, type = 'info') {
   const toast = document.createElement('div');
@@ -394,6 +402,36 @@ function bindEvents() {
       }
     });
   });
+
+  // View Panel Navigation Toggle
+  navBtnLinks.addEventListener('click', () => {
+    navBtnLinks.classList.add('active');
+    navBtnTv.classList.remove('active');
+    viewLinks.classList.remove('hidden');
+    viewTv.classList.add('hidden');
+  });
+
+  navBtnTv.addEventListener('click', () => {
+    navBtnTv.classList.add('active');
+    navBtnLinks.classList.remove('active');
+    viewTv.classList.remove('hidden');
+    viewLinks.classList.add('hidden');
+  });
+
+  // Auto format TV Code input: 0000-0000
+  tvCodeInput.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 4) {
+      value = value.slice(0, 4) + '-' + value.slice(4, 8);
+    }
+    e.target.value = value;
+  });
+
+  // Submit TV Login activation
+  submitTvLoginBtn.addEventListener('click', submitTvLogin);
+  tvCodeInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') submitTvLogin();
+  });
 }
 
 // Handle Active Assignments UI State
@@ -484,6 +522,47 @@ async function releaseActiveLink() {
 function init() {
   bindEvents();
   fetchProjects(false);
+}
+
+// Submit Smart TV Activation code
+async function submitTvLogin() {
+  const codeValue = tvCodeInput.value.trim();
+  const cleanCode = codeValue.replace(/-/g, '');
+
+  if (cleanCode.length !== 8) {
+    showToast('Mã kích hoạt Tivi phải có đúng 8 chữ số.', 'warning');
+    return;
+  }
+
+  const originalHtml = submitTvLoginBtn.innerHTML;
+  submitTvLoginBtn.disabled = true;
+  submitTvLoginBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang kích hoạt...';
+
+  try {
+    const response = await fetch('/api/external/tv-login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ code: cleanCode })
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.success) {
+      showToast('Kích hoạt đăng nhập Smart TV thành công!', 'success');
+      tvCodeInput.value = '';
+    } else {
+      const errMsg = data.error || data.message || 'Kích hoạt thất bại. Vui lòng kiểm tra lại mã!';
+      showToast(errMsg, 'error');
+    }
+  } catch (error) {
+    console.error('TV login error:', error);
+    showToast(error.message || 'Lỗi kết nối máy chủ TV login.', 'error');
+  } finally {
+    submitTvLoginBtn.disabled = false;
+    submitTvLoginBtn.innerHTML = originalHtml;
+  }
 }
 
 // Start App when page content loaded
