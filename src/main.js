@@ -42,8 +42,13 @@ const tabButtons = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
 
 // TV Login Elements
+const navBtnLinks = document.getElementById('nav-btn-links');
+const navBtnTv = document.getElementById('nav-btn-tv');
+const viewLinks = document.getElementById('view-links');
+const viewTv = document.getElementById('view-tv');
 const tvCodeInput = document.getElementById('tv-code-input');
 const submitTvLoginBtn = document.getElementById('submit-tv-login-btn');
+const tabSlider = document.querySelector('.tab-slider');
 
 // Toast notification helper
 function showToast(message, type = 'info') {
@@ -399,7 +404,38 @@ function bindEvents() {
     });
   });
 
+  // View Panel Navigation Toggle with Premium Slider
+  const updateTabSlider = (activeBtn) => {
+    if (activeBtn && tabSlider) {
+      tabSlider.style.width = `${activeBtn.offsetWidth}px`;
+      tabSlider.style.transform = `translateX(${activeBtn.offsetLeft - 6}px)`;
+    }
+  };
 
+  navBtnLinks.addEventListener('click', () => {
+    navBtnLinks.classList.add('active');
+    navBtnTv.classList.remove('active');
+    viewLinks.classList.remove('hidden');
+    viewTv.classList.add('hidden');
+    updateTabSlider(navBtnLinks);
+  });
+
+  navBtnTv.addEventListener('click', () => {
+    navBtnTv.classList.add('active');
+    navBtnLinks.classList.remove('active');
+    viewTv.classList.remove('hidden');
+    viewLinks.classList.add('hidden');
+    updateTabSlider(navBtnTv);
+  });
+
+  // Position slider initially after DOM layout
+  setTimeout(() => updateTabSlider(navBtnLinks), 150);
+  
+  // Also reposition on window resize to ensure fluid responsive layouts
+  window.addEventListener('resize', () => {
+    const activeBtn = document.querySelector('.premium-tab-btn.active');
+    updateTabSlider(activeBtn);
+  });
 
   // Auto format TV Code input: 0000-0000
   tvCodeInput.addEventListener('input', (e) => {

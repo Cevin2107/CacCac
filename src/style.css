@@ -1129,3 +1129,82 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Premium Tab Switcher Styles */
+.tabs-container-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.premium-tabs {
+  position: relative;
+  display: flex;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  padding: 6px;
+  border-radius: 30px;
+  box-shadow: var(--shadow-premium);
+}
+
+.premium-tab-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  padding: 12px 24px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 24px;
+}
+
+.premium-tab-btn:hover {
+  color: #FFFFFF;
+}
+
+.premium-tab-btn.active {
+  color: var(--color-primary);
+}
+
+/* Sliding active background indicator */
+.tab-slider {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  height: calc(100% - 12px);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 24px;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s ease;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.08);
+}
+
+/* Standalone TV Card Layout */
+.tv-login-card-standalone {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 550px;
+  margin: 40px auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), var(--shadow-premium);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: var(--transition-smooth);
+}
+
+.tv-login-card-standalone:hover {
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.05), var(--shadow-premium);
+}
