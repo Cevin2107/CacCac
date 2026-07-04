@@ -184,11 +184,14 @@ function renderProjects() {
     // Stream info
     const activeStreams = project.active_count ?? 0;
     const maxStreams = project.max_streams ?? 4;
+    const isBusy = project.load_level === 'full' || activeStreams >= maxStreams;
     
     // Status text
     let statusBadge = `<span class="badge bg-primary">Hoạt động</span>`;
     if (isExpired) {
       statusBadge = `<span class="badge bg-red">Hết hạn</span>`;
+    } else if (isBusy) {
+      statusBadge = `<span class="badge bg-orange">Đang Bận</span>`;
     } else if (project.health_error) {
       statusBadge = `<span class="badge bg-orange">Lỗi kết nối</span>`;
     }
@@ -231,8 +234,8 @@ function renderProjects() {
         </div>
       ` : ''}
       
-      <button class="btn btn-claim" ${isExpired ? 'disabled' : ''} data-id="${project.id}">
-        <i class="fa-solid fa-circle-plus"></i> Tạo Link
+      <button class="btn btn-claim" ${isExpired || isBusy ? 'disabled' : ''} data-id="${project.id}">
+        <i class="fa-solid fa-${isBusy ? 'ban' : 'circle-plus'}"></i> ${isBusy ? 'Đang bận' : 'Tạo Link'}
       </button>
     `;
 
