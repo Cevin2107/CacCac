@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CacCac — Netflix VIP claimer</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Direct CSS Link to prevent FOUC -->
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Background glowing orbs for premium visual effect -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <header class="app-header">
+        <div class="logo-area">
+          <div class="logo-icon">
+            <i class="fa-solid fa-house-chimney-user"></i>
+          </div>
+          <div>
+            <h1>Cac<span>Cac</span></h1>
+            <p class="subtitle">Hệ thống Lấy Link Netflix Premium Tự Động</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="refresh-list-btn" class="btn btn-primary">
+            <i class="fa-solid fa-arrows-rotate"></i> Tải lại danh sách
+          </button>
+        </div>
+      </header>
+
+      <!-- Stats Overview -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon icon-emerald"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Tổng link khả dụng</span>
+            <span id="total-links-count" class="stat-val">-</span>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon icon-purple"><i class="fa-solid fa-gauge-high"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Hạn ngạch sử dụng (Rate limit)</span>
+            <div class="rate-limit-wrapper">
+              <span id="rate-limit-text" class="stat-val">- / -</span>
+              <div class="progress-bar-bg">
+                <div id="rate-limit-bar" class="progress-bar" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Link Panel -->
+      <section id="active-link-panel" class="active-link-card hidden">
+        <div class="active-link-header">
+          <h3><i class="fa-solid fa-circle-play text-gradient"></i> Link Netflix đang hoạt động</h3>
+          <span id="active-link-badge" class="badge bg-primary">Link #xxxx</span>
+        </div>
+        <div class="active-link-body">
+          <div class="active-link-url-wrapper">
+            <input type="text" id="active-link-url" readonly value="" />
+            <button id="active-copy-btn" class="btn btn-primary"><i class="fa-solid fa-copy"></i> Copy</button>
+            <a id="active-open-btn" href="#" target="_blank" class="btn btn-primary-gradient"><i class="fa-solid fa-play"></i> Xem ngay</a>
+          </div>
+          <button id="release-link-btn" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Trả link (Giải phóng lượt)</button>
+        </div>
+      </section>
+
+      <!-- Grid list -->
+      <main class="list-section">
+        <div class="section-title">
+          <h2><i class="fa-solid fa-ticket"></i> Danh sách Netflix Siêu Vip Premium Pro</h2>
+          <div class="filter-wrapper">
+            <span class="filter-label">Bộ lọc quốc gia:</span>
+            <select id="country-filter" class="filter-select">
+              <option value="all">Tất cả quốc gia</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Loading State -->
+        <div id="list-loading" class="loading-state hidden">
+          <div class="spinner"></div>
+          <p>Đang tải danh sách tài khoản Netflix...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="list-empty" class="empty-state">
+          <i class="fa-solid fa-inbox empty-icon"></i>
+          <h3>Chưa có dữ liệu</h3>
+          <p>Vui lòng cấu hình Token và tải lại danh sách tài khoản.</p>
+        </div>
+
+        <!-- Real list Grid -->
+        <div id="projects-grid" class="projects-grid"></div>
+      </main>
+    </div>
+
+    <!-- Claim Result Modal -->
+    <div id="result-modal" class="modal-overlay hidden">
+      <div class="modal-content glass-card">
+        <div class="modal-header">
+          <h2><i class="fa-solid fa-wand-magic-sparkles text-gradient"></i> Tạo Link Thành Công!</h2>
+          <button id="close-modal-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="project-summary-badge">
+            <span id="modal-project-label" class="badge bg-primary">Link #xxxx</span>
+            <span id="modal-project-plan" class="badge bg-purple">Premium</span>
+          </div>
+          <p class="modal-desc">Sử dụng liên kết dưới đây để đăng nhập trực tiếp vào tài khoản Netflix của bạn:</p>
+          
+          <div class="result-link-box">
+            <input type="text" id="claimed-link-url" readonly value="" />
+            <button id="copy-link-btn" class="btn btn-primary" title="Sao chép link">
+              <i class="fa-solid fa-copy"></i> Copy
+            </button>
+          </div>
+          
+          <div class="modal-notice">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Vui lòng không thay đổi thông tin tài khoản (mật khẩu, thanh toán) để tránh bị khóa link.</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="close-modal-secondary-btn" class="btn btn-secondary">Đóng</button>
+          <a id="open-netflix-btn" href="#" target="_blank" class="btn btn-primary-gradient">
+            <i class="fa-solid fa-circle-play"></i> Truy cập ngay
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
