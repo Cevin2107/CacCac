@@ -17,6 +17,35 @@ const __dirname = path.dirname(__filename);
 // Middleware
 app.use(express.json());
 
+// Maintenance Mode Middleware
+app.use((req, res, next) => {
+  if (process.env.MAINTENANCE_MODE === 'TRUE') {
+    return res.status(503).send(`
+      <!DOCTYPE html>
+      <html lang="vi">
+        <head>
+          <title>Bảo trì hệ thống</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <style>
+            body { background: #080B11; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
+            .card { background: rgba(22, 29, 48, 0.45); border: 1px solid rgba(255, 255, 255, 0.08); padding: 40px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); max-width: 500px; width: 90%; }
+            h2 { color: #EF4444; margin-bottom: 16px; font-size: 24px;}
+            p { color: #94A3B8; font-size: 16px; line-height: 1.5; }
+          </style>
+        </head>
+        <body>
+          <div class="card">
+            <h2>⛔ Đã Khóa</h2>
+            <p>Hiện tại web đã dừng hoạt động, user không thể truy cập gì nữa.</p>
+          </div>
+        </body>
+      </html>
+    `);
+  }
+  next();
+});
+
 // Enable CORS for development mode if running on different ports
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
